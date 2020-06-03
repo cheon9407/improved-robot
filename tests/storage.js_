@@ -1,0 +1,38 @@
+module.exports = {
+
+    '@disabled': false,
+    '@tags': ['issue', 'localstorage'],
+  
+    'Set / Get value from localStorage': function (browser) {
+      browser
+        .url('http://nightwatchjs.org/')
+        .execute(function() {
+          window.localStorage.setItem('foo', 'bar');
+          return true;
+        }, [], function(result) {
+          this.assert.ok(result.value);
+        })
+        .execute(function() {
+          return window.localStorage.getItem('foo');
+        }, [], function(result) {
+          this.assert.equal(result.value, 'bar');
+        })
+        // Update: commented, since it would break the test
+        // as @Mark90 correctly pointed out in comment below
+        //
+        // .end();
+    },
+  
+  
+    'Get value from localStorage': function (browser) {
+      browser
+        .url('http://nightwatchjs.org/')
+        .execute(function() {
+          return window.localStorage.getItem('foo');
+        }, [], function(result) {
+          this.assert.equal(result.value, 'bar');
+        })
+        .end();
+    }
+  };
+  

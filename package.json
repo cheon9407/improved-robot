@@ -1,0 +1,23 @@
+{
+  "name": "AutoSearch",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "nightwatch",
+    "test:chrome": "npm test -- --env chrome",
+    "test:firefox": "npm test -- --env firefox",
+    "debug": "node --inspect-brk node_modules/nightwatch/bin/runner.js --env chrome",
+    "s": "node ./node_modules/selenium-server/bin/selenium"
+  },
+  "devDependencies": {
+    "chromedriver": "^83.0.0",
+    "geckodriver": "^1.19.1",
+    "nightwatch": "^1.3.6",
+    "selenium-server": "^3.141.59"
+  },
+  "dependencies": {
+    "chrome-modheader": "^1.0.5",
+    "country-ip-spoofer": "^1.0.1"
+  }
+}

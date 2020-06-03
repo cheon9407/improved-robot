@@ -1,0 +1,11 @@
+.vagrant
+env
+node_modules
+
+reports
+roles
+
+*.zip
+*.log
+
+package-lock.json

@@ -1,0 +1,56 @@
+
+module.exports = {
+    'Searching Naver 01' : function (browser) {
+      const searchKeyword = "스터디카페 키오스크"
+      const NewsEl = `//div[@class="sv_t" and contains(text(), "뉴스판")]`
+      const targetUrl = "https://m.blog.naver.com/mongddang-company/221973236300"
+      const viewMoreEl = '//a[@class="api_more" and contains(text(), "VIEW 더보기")]'
+      const targetEl = `//a[@class="total_dsc" and contains(@href, "${targetUrl}")]`
+      // const t = document.querySelectorAll('div.api_txt_lines.dsc_txt')
+      // console.log(t)
+      const BREAK_ON = false
+      const BREAKER = 'other'
+      const randomTime = ()=>{
+        return (Math.random() * 1000 % 4) * 1000
+      }
+      // const randomTime = 6000
+      browser
+      .useXpath()
+      .url('http://m.naver.com')
+
+      .pause(randomTime())
+      .click(NewsEl)
+
+      .pause(randomTime())
+      .back()
+      // .waitForElementNotVisible('body', 5000)
+      // .waitForElementVisible(BREAKER, 5000, BREAK_ON)
+      .setValue('//input[@id="MM_SEARCH_FAKE"]', searchKeyword)
+      .pause(randomTime())
+      // .waitForElementVisible(BREAKER, 1000, BREAK_ON)
+      .setValue('//input[@id="query"]', searchKeyword)
+      // .setValue('input[id="query"]', searchKeyword)
+      // .waitForElementVisible(BREAKER, 1000, BREAK_ON)
+      .pause(randomTime())
+      .click('//span[@class="ico_sch_submit"]')  // 검색 버튼 클릭
+
+      // .waitForElementVisible(BREAKER, 1000, BREAK_ON)
+      .waitForElementVisible(viewMoreEl, 1000)
+      .pause(randomTime())
+      .moveToElement(viewMoreEl, 10, 10)
+      .pause(randomTime())
+
+      // .waitForElementVisible(BREAKER, 1000, BREAK_ON)
+      .click(viewMoreEl) // view 더보기
+
+      // .waitForElementVisible(BREAKER, 1000, BREAK_ON)
+      .waitForElementVisible(targetEl, 1000)
+      .moveToElement(targetEl, 10, 10)
+      .pause(randomTime())
+      .click(targetEl) // 
+      .pause(randomTime() * 10)
+      .assert.title('NAVER')
+      .end();
+
+    },
+  };
